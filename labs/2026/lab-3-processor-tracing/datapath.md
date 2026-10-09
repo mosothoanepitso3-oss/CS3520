@@ -29,7 +29,8 @@ Tracing from the internal branch comparison hardware to `pc_src.select`, the sig
 * **CPI:** 1.00
 * **IPC:** 1.00
 
-### Step 5 Think Question Response
+
+
 * **Which performance term did this design sacrifice?** 
   The single-cycle design severely sacrificed **\(T_c\) (the Clock Cycle Time / Clock Period)**. 
 * **By what factor was it sacrificed?** 
