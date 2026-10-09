@@ -1,4 +1,5 @@
-# Lab 3: Step 4 Notebook Questions
+
+Step 4 Notebook Questions
 
 ### 1. `lui` and `auipc` Architectural Difference
 * **Component making the difference:** The ALU operand 1 multiplexer (`alu_op1_src`).
