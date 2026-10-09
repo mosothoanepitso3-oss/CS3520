@@ -20,7 +20,7 @@ Tracing from the internal branch comparison hardware to `pc_src.select`, the sig
 * **Alternative Resource Restriction:** Neither the ALU nor the Data Memory can supply this address because the ALU is simultaneously tasked with computing the target branch/jump jump offset address, and the Data Memory is restricted to managing data loads/stores.
 
 
-# Lab 3: Step 5 Statistics and Performance Analysis
+ Step 5 Statistics and Performance Analysis
 
 ### Simulation Metrics
 * **Total Instructions in Memory:** 18
