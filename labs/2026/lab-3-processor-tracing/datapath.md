@@ -18,3 +18,20 @@ Tracing from the internal branch comparison hardware to `pc_src.select`, the sig
 ### 4. Jump Return Address Sourcing
 * **Multiplexer Input:** The return address is fed exclusively from the **`PC + 4`** dedicated hardware line connected to the write-back multiplexer.
 * **Alternative Resource Restriction:** Neither the ALU nor the Data Memory can supply this address because the ALU is simultaneously tasked with computing the target branch/jump jump offset address, and the Data Memory is restricted to managing data loads/stores.
+
+
+# Lab 3: Step 5 Statistics and Performance Analysis
+
+### Simulation Metrics
+* **Total Instructions in Memory:** 18
+* **Instructions Retired:** 14
+* **Cycles Elapsed:** 14
+* **CPI:** 1.00
+* **IPC:** 1.00
+
+### Step 5 Think Question Response
+* **Which performance term did this design sacrifice?** 
+  The single-cycle design severely sacrificed **\(T_c\) (the Clock Cycle Time / Clock Period)**. 
+* **By what factor was it sacrificed?** 
+  Because a single-cycle datapath must allow the slowest possible instruction (usually `lw`) to travel through *every single element* (Fetch, Decode, ALU, Data Memory, and Write-Back) within one lone cycle, the clock period must be stretched to accommodate the sum of all component delays. 
+  Compared to a standard 5-stage pipelined processor where the clock period is only bounded by the single slowest individual stage, the single-cycle design sacrifices clock cycle time by a factor of roughly **4 to 5 times** slower.
