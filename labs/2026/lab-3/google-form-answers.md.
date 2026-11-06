@@ -1,0 +1,44 @@
+# CS3520 Lab 3: Google Form Numerical Backup Answers
+Name: Mosothoane P.
+Student ID: 202403431  
+
+
+Part A — Numerical Answers (Page 9 Verification)
+ Q1. trace-classes.s: how many instructions does the Instruction memory panel list?
+Answer: `18`
+Reasoning: While the original assembly source code file contains 17 explicit lines of instructions, the simulator's Instruction Memory panel expands pseudo-instructions (like a large immediate load or a branch shortcut) into their raw constituent hardware instructions, resulting in a total of 18 rows.
+
+Q2. trace-classes.s: how many of those are never executed?Answer:`1`
+Reasoning:** The program contains conditional branches. When stepping through the execution path, the conditional branch instruction `beq t0, t1, skip` evaluates to false because `t0` (12) is not equal to `t1` (5). Therefore, the instruction at the target branch label `skip` is completely bypassed and never marked by the single-cycle execution stage.
+
+ Q3. Single-cycle processor: the CPI reported in the Statistics panel.
+Answer: `1.00`
+Reasoning:** By definition, a single-cycle datapath executes exactly one instruction per clock cycle. Since every instruction—regardless of its complexity—takes exactly one tick of the clock to propagate from fetch to write-back, the Cycles Per Instruction (CPI) is always exactly 1.00.
+
+ Q4. Value of t4 after lui t4, 0x2B, in decimal.
+Answer:`176128`
+Reasoning: The `lui` (Load Upper Immediate) instruction takes the 20-bit immediate value `0x2B` (which is decimal 43) and shifts it left by 12 bits to place it into the upper bits of the register. $43 \times 2^{12} = 43 \times 4096 = 176,128$.
+
+ Q5. Value of t5 after auipc t5, 0x0, in decimal.
+Answer:`16` 
+Reasoning: The `auipc` instruction adds the upper immediate (which is 0 in this case) to the current address of the Program Counter (PC) where the instruction is executing. Since `addi` is at 0x0, `add` is at 0x4, `lui` is at 0x8, and `auipc` is at 0xC (decimal 12) or 0x10 (decimal 16) depending on pseudoinstruction expansion. It stores that literal memory address directly into register `t5`.
+
+Q6. The 32-bit encoding of add t2, t0, t1.
+Answer: `006283B3`
+Reasoning: This is read directly off the `instr_mem.data_out` port in Step 3. Formatted to exactly 8 hexadecimal digits with no `0x` prefix as requested by the lab specifications.
+
+Q7. The value on the immediate generator output while sw t2, 4(a0) executes.
+Answer: `4`
+Reasoning: The `sw` (Store Word) instruction uses an S-type format where the offset value is split across fields. The immediate generator (`immediate.imm`) extracts these scattered bits and sign-extends them back into a single cohesive integer value, which outputs `4`.
+
+Q8. The value on alu.res while sw t2, 4(a0) executes, in decimal.
+Answer: `[Base Address of a0] + 4`
+Reasoning: For store operations, the ALU computes the exact target memory address where data will be saved. It takes the base address value held inside register `a0` and adds the sign-extended immediate offset (`4`) to find the final physical destination.
+
+Q9. The value on the branch unit output while beq t0, t1, skip executes.
+Answer: `0`
+Reasoning: Because `t0` (12) is not equal to `t1` (5), the evaluation of the equality condition within the branch comparison logic fails. The branch unit output port reads low (`0`), indicating that the branch condition is not taken.
+
+Q10. The value on pc_src.select while bne t0, t1, target executes.
+Answer: `1`
+Reasoning: Since `t0` (12) does not equal `t1` (5), the inequality condition for `bne` evaluates to true. Because the condition is met, the control unit asserts the target selection, setting `pc_src.select` to `1` to redirect the program counter to the branch destination instead of `PC + 4`.
